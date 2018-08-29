@@ -1,151 +1,158 @@
 <html lang="pt_br">
-	<head>
-		<meta name="viewport" content="width=200px, initial-scale=1">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-		<style>
-			body{
-				background-color: #ecf0f1;
-				font-family: 'Montserrat', sans-serif;
-			}
-			#calculator{
-				text-align: center;
-				margin: 0 auto;
-			  background-color: #2ecc71;
-			  border-radius: 3px;
-			}
-            div{
-                overflow: hidden;
-            }
-			input{
-				display: block;
-                margin : 0 auto;
-				border: 0;
-				height: 25px;
-				background-color: #ecf0f1;
-				box-shadow: none;
-				border-radius: 1px;
-				font-size: 15px;
-				border-radius: 10px;
-				text-align: center;
-				width: 40%;
-				font-family: inherit;
-			}
-			input:hover{
-				background-color: #dddddd;
 
-			}
-			input:focus{
-    		    outline: none;
-			}
-
-			.heading{
-				font-family: 'Montserrat', sans-serif;
-				font-weight: bold;
-				font-size: 80px;
-				color:#fcfcfc;
-				position: relative;
-				text-align: center;
-				border-radius: 3px;
-			}
-
-			.option{
-				background-color: inherit;
-			}
-
-
-            .switch {
-                position: relative;
-                display: inline-block;
-                width: 60px;
-                height: 34px;
-            }
-
-            .switch input {display:none;}
-
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #ccc;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-
-            /* input:checked + .slider {
+<head>
+    <meta name="viewport" content="width=200px, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ecf0f1;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        #calculator {
+            text-align: center;
+            margin: 0 auto;
+            background-color: #2ecc71;
+            border-radius: 3px;
+        }
+        
+        div {
+            overflow: hidden;
+        }
+        
+        input {
+            display: block;
+            margin: 0 auto;
+            border: 0;
+            height: 25px;
+            background-color: #ecf0f1;
+            box-shadow: none;
+            border-radius: 1px;
+            font-size: 15px;
+            border-radius: 10px;
+            text-align: center;
+            width: 40%;
+            font-family: inherit;
+        }
+        
+        input:hover {
+            background-color: #dddddd;
+        }
+        
+        input:focus {
+            outline: none;
+        }
+        
+        .heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 80px;
+            color: #fcfcfc;
+            position: relative;
+            text-align: center;
+            border-radius: 3px;
+        }
+        
+        .option {
+            background-color: inherit;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            display: none;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        /* input:checked + .slider {
                 background-color: #2196F3;
             } */
+        
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+        /* Rounded sliders */
+        
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        
+        .variable {
+            background-color: lightslategray;
+            border-radius: 3px;
+            padding: 5%;
+        }
+    </style>
+</head>
 
-            input:checked + .slider:before {
-                -webkit-transform: translateX(26px);
-                -ms-transform: translateX(26px);
-                transform: translateX(26px);
-            }
+<body>
+    <div style="position: relative; padding:10px; margin:5%" id="calculator">
+        <div class="heading">Rodas:</div>
+        <div class="variable"> Velocidade máxima:
+            <div class="option">
+                [cm/s]
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                [m/s]
+            </div>
+            <input type="number" step="0.1" value="1" id="max_speed">
+        </div>
+        <p> Rampa máxima a ser vencida: [º] </p>
+        <input type="number" min="0" max="360" value="0" id="angle">
+        <p> Tempo máximo de aceleração: [s] </p>
+        <input type="number" step="0.1" value="1" id="max_speed">
+        <div> Peso esperado:
+            <div class="option">
+                [G]
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                [kG]
+            </div>
+        </div>
+        <input type="number" step="0.01" value="1" id="weight">
+        <p> Diâmetro: [mm]</p>
+        <input type="number" step="0.1">
 
-            /* Rounded sliders */
-            .slider.round {
-                border-radius: 34px;
-            }
+    </div>
+</body>
 
-            .slider.round:before {
-                border-radius: 50%;
-            }
-
-            .variable {
-                background-color:lightslategray;
-                border-radius: 3px;
-                padding: 5%;
-            }
-		</style>
-	</head>
-	<body>
-		<div style="position: relative; padding:10px; margin:5%" id="calculator">
-				<div class="heading">Rodas:</div>
-                <div class="variable"> Velocidade máxima: 
-                    <div class="option">
-                        [cm/s]
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                        [m/s]
-                    </div>
-                    <input type="number" step="0.1" value="1" id="max_speed">
-                </div>
-				<p> Rampa máxima a ser vencida: [º] </p>
-				<input type="number" min="0" max="360" value="0" id="angle">
-				<p> Tempo máximo de aceleração: [s] </p>
-				<input type="number" step="0.1" value="1" id="max_speed">
-				<div> Peso esperado:
-                        <div class="option">
-                            [G]
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                            [kG]
-                        </div>
-                </div>
-				<input type="number" step="0.01" value="1" id="weight">
-				<p> Diâmetro: [mm]</p>
-				<input type="number" step="0.1">
-
-		</div>
-	</body>
 </html>
