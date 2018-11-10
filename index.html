@@ -2,69 +2,71 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-		<link rel="icon" href="res/draw/icon.ico">
-	</head>
-	<body>
+		<link rel="icon" href="res/draw/icon.png">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
 		<script src="https://cdn.rawgit.com/Keyframes/jQuery.Keyframes/f383a7c3/dist/jquery.keyframes.min.js"></script>
+		<script>
+			if (navigator.vendor=="Google Inc."){
+				window.location.href = '/sorry'; //relative to domain
+			}
+			$(document).ready(function() {
 
+				$("#eolic_park_frame .blades").each(function(){
+					$(this).css("transform-origin", $(this).siblings().first().children("circle").attr("cx") + "px " + $(this).siblings().first().children("circle").attr("cy") + "px").css("transform", "rotate("+Math.random()*(360/3)+"deg)");
+				});
+				$.keyframe.define([
+					{
+						name: 'beach_wave',
+						'from': {'transform' : 'translatex(-10px)'},
+						'to': {'transform' : 'translatex(10px)'}
+					},{
+						name: 'keyf_clouds',
+						'from': { 'transform': 'translatex(-100px)', 'opacity': '0'},
+						'5%':  	{ 'opacity':   '0'},
+						'15%':  { 'opacity':   '0.85'},
+						'75%':  { 'opacity':   '0.85'},
+						'85%':  { 'opacity':   '0'},
+						'to':   { 'transform': 'translatex(2560px)', 'opacity': '0'}
+					}
+				]);
+				$("#eolic_park_frame #sea_shade").find('.animate').each(function(){
+					$(this).playKeyframe({
+							name: 'beach_wave',
+							duration: Math.random()+2+'s',
+							timingFunction: 'ease-in-out',
+							iterationCount: 'infinite',
+							direction: 'alternate'
+						},function(){}
+					);
+				})
+				$("#eolic_park_frame #the_beach").find('*').not('g').each(function(){
+					$(this).playKeyframe({
+							name: 'beach_wave',
+							duration: Math.random()*2+2+'s',
+							timingFunction: 'ease-in-out',
+							iterationCount: 'infinite',
+							direction: 'alternate'
+						},function(){}
+					);
+				});
+
+				$("#eolic_park_frame .clouds").each(function(){
+					$(this).playKeyframe({
+							name: 'keyf_clouds',
+							duration: Math.random()*30+20+'s',
+							timingFunction: 'linear',
+							iterationCount: 'infinite',
+							direction: 'normal'
+						},function(){});
+				});
+
+			});
+			// 		#cloud_01{animation: keyf_cloud_01 linear 50s infinite;}
+			// 		#cloud_02{animation: keyf_cloud_02 linear 40s infinite;}
+		</script>
+	</head>
+	<body>
 		<div id="eolic_park_frame" class="views" style="width:100%; height:100%; overflow:hidden;">
-			<script>
-					$(document).ready(function() {
-
-						$("#eolic_park_frame .blades").each(function(){
-							$(this).css("transform-origin", $(this).siblings().first().children("circle").attr("cx") + "px " + $(this).siblings().first().children("circle").attr("cy") + "px").css("transform", "rotate("+Math.random()*(360/3)+"deg)");
-						});
-						$.keyframe.define([
-							{
-								name: 'beach_wave',
-								'from': {'transform' : 'translatex(-10px)'},
-								'to': {'transform' : 'translatex(10px)'}
-							},{
-								name: 'keyf_clouds',
-								'from': { 'transform': 'translatex(-100px)', 'opacity': '0'},
-								'5%':  	{ 'opacity':   '0'},
-								'15%':  { 'opacity':   '0.85'},
-								'75%':  { 'opacity':   '0.85'},
-								'85%':  { 'opacity':   '0'},
-								'to':   { 'transform': 'translatex(2560px)', 'opacity': '0'}
-							}
-						]);
-						$("#eolic_park_frame #sea_shade").find('.animate').each(function(){
-							$(this).playKeyframe({
-									name: 'beach_wave',
-									duration: Math.random()+2+'s',
-									timingFunction: 'ease-in-out',
-									iterationCount: 'infinite',
-									direction: 'alternate'
-								},function(){}
-							);
-						})
-						$("#eolic_park_frame #the_beach").find('*').not('g').each(function(){
-							$(this).playKeyframe({
-									name: 'beach_wave',
-									duration: Math.random()*2+2+'s',
-									timingFunction: 'ease-in-out',
-									iterationCount: 'infinite',
-									direction: 'alternate'
-								},function(){}
-							);
-						});
-
-						$("#eolic_park_frame .clouds").each(function(){
-							$(this).playKeyframe({
-									name: 'keyf_clouds',
-									duration: Math.random()*30+20+'s',
-									timingFunction: 'linear',
-									iterationCount: 'infinite',
-									direction: 'normal'
-								},function(){});
-						});
-
-					});
-					// 		#cloud_01{animation: keyf_cloud_01 linear 50s infinite;}
-					// 		#cloud_02{animation: keyf_cloud_02 linear 40s infinite;}
-			</script>
 
 			<style scoped>
 				*{padding: 0; top:0;bottom:0;left:0;right:0}
